@@ -1,0 +1,32 @@
+body {text-align: center;}
+div {margin: 5px;}
+a {color: -webkit-link;
+	text-decoration: underline;
+	cursor: pointer;}
+.col {display:inline-block;
+	width: 45%;
+	vertical-align: top;}
+#text .col textarea {width: 80%;
+	height: 10em;
+	vertical-align: top;
+	background-color: #E8E8E8;}
+#buttons button {display: inline;
+	margin: 10px;}
+#manual table {margin-left: auto;
+	margin-right: auto;}
+#manual table td {padding: 0px 5px;}
+#manual input {width: 2em;}
+#caesar input {width: 4em;}
+#statistics table {margin-left: auto;
+	margin-right: auto;
+	border-collapse:collapse;}
+#statistics table td {border: 1px black solid;
+	padding: 3px 15px;}
+#menu {position: absolute;
+	top: 0;
+	right: 0;
+	width: 8%;
+	text-align: right;}
+#menu a {margin-bottom: 8px;
+	display: block;}
+.dontdisplay {display: none;}
