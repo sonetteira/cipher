@@ -157,3 +157,33 @@ function blocksFive()
 	}
 	document.getElementById("plaintext").value = newtext;
 }
+
+function randomAB()
+{
+	manualMenu();
+	var rab = new Array();
+	for(i=1; i<=26; i++)
+	{ //create an array of integers 1 to 26
+		rab.push(i);
+	}
+	rab = shuffle(rab); //randomize
+	for(i=0; i<26; i++)
+	{ //print associated letters
+		document.getElementById(i+1).value = alphabet(rab[i]);
+	}
+}
+
+function shuffle(array) { //Fisher-Yates Snuggle https://raw.githubusercontent.com/coolaj86/knuth-shuffle/master/index.js
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
