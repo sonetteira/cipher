@@ -25,32 +25,9 @@ function clearAll()
 	document.getElementById("plaintext").value="";
 	document.getElementById("message").innerHTML="";
 	document.getElementById("cnumber").value="";
-	document.getElementById("1").value="";
-	document.getElementById("2").value="";
-	document.getElementById("3").value="";
-	document.getElementById("4").value="";
-	document.getElementById("5").value="";
-	document.getElementById("6").value="";
-	document.getElementById("7").value="";
-	document.getElementById("8").value="";
-	document.getElementById("9").value="";
-	document.getElementById("10").value="";
-	document.getElementById("11").value="";
-	document.getElementById("12").value="";
-	document.getElementById("13").value="";
-	document.getElementById("14").value="";
-	document.getElementById("15").value="";
-	document.getElementById("16").value="";
-	document.getElementById("17").value="";
-	document.getElementById("18").value="";
-	document.getElementById("19").value="";
-	document.getElementById("20").value="";
-	document.getElementById("21").value="";
-	document.getElementById("22").value="";
-	document.getElementById("23").value="";
-	document.getElementById("24").value="";
-	document.getElementById("25").value="";
-	document.getElementById("26").value="";
+	for(i=1; i<=26; i++)
+	{ document.getElementById(i).value=""; }
+	document.getElementById("substats").innerHTML = "";
 	document.getElementById("statistics").innerHTML = "";
 	document.getElementById("ctlabel").innerHTML = "CipherText";
 	document.getElementById("ptlabel").innerHTML = "PlainText";
@@ -63,7 +40,7 @@ function alphabet(n)
 	{
 		n = n-26;
 	}
-	if(n<=0) //in reverse, if past a, start again a z
+	if(n<=0) //in reverse, if past a, start again at z
 	{
 		n = n+26;
 	}
@@ -111,13 +88,15 @@ function print(product)
 }
 
 function DEswitch()
-{ //determine if data for switch exists, determine which switch to make
+{ //reverse the decryption scheme to encrypt text in the same way as the original ciphertext
+	//determine if data for switch exists, determine which switch to make
 	if (which=="")
 	{	document.getElementById("message").innerHTML = "You do not have a decryption scheme to switch."; }
 	else if(which == "substitute")
 	{	substituteSwitch();
 		document.getElementById("ctlabel").innerHTML = "PlainText";
-		document.getElementById("ptlabel").innerHTML = "CipherText"; }
+		document.getElementById("ptlabel").innerHTML = "CipherText";
+		document.getElementById("substats").innerHTML = "";}
 	else if(which == "caesar")
 	{	caesarSwitch();
 		document.getElementById("ctlabel").innerHTML = "PlainText";
@@ -159,7 +138,7 @@ function blocksFive()
 }
 
 function randomAB()
-{
+{ //create a randomized substitution alphabet
 	manualMenu();
 	var rab = new Array();
 	for(i=1; i<=26; i++)
@@ -173,17 +152,19 @@ function randomAB()
 	}
 }
 
-function shuffle(array) { //Fisher-Yates Snuggle https://raw.githubusercontent.com/coolaj86/knuth-shuffle/master/index.js
-  var currentIndex = array.length, temporaryValue, randomIndex;
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
+function shuffle(array) 
+{ //Fisher-Yates Snuffle https://raw.githubusercontent.com/coolaj86/knuth-shuffle/master/index.js
+	var currentIndex = array.length, temporaryValue, randomIndex;
+	// While there remain elements to shuffle...
+	while (0 !== currentIndex)
+	{
+		// Pick a remaining element...
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+		// And swap it with the current element.
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}
+	return array;
 }

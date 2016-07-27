@@ -1,4 +1,11 @@
 //substution functions
+function clearSubs()
+{
+	for(i=1; i<=26; i++)
+	{ document.getElementById(i).value=""; }
+	document.getElementById("substats").innerHTML="";
+}
+
 function buildSubs()
 {
 	var subs = new Array();
@@ -59,6 +66,7 @@ function substitute()
 			plaintext.push(blank);
 		}
 		print(plaintext);
+		printSubStat(subs);
 	}
 	else //one of the substitutions was invalid
 	{ document.getElementById("message").innerHTML = "Each substitution needs to be 1 letter only."; }
@@ -85,4 +93,39 @@ function substituteSwitch()
 	}
 	else //one of the substitutions was invalid
 	{ document.getElementById("message").innerHTML = "Each substitution needs to be 1 letter only."; }
+}
+
+function printSubStat(subs)
+{ //print out statistics for the substitutions used
+	ab = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	dup = false;
+	stats = 'Letters you are using:<br><table>'
+	for(i=0; i<13; i++)
+	{
+		stats += '<tr>'
+		for(j=0; j<=1; j++)
+		{
+			k = ( j==0 ? i : i+13 );
+			stats += '<td>' + ab[k] + '</td><td>';
+			if(subs.indexOf(betalpha(ab[k])) != -1)
+			{ //if a letter is being used as a substitution, give it a checkmark
+				stats += '&#10003;';
+			}
+			stats += '</td>';
+		}
+		stats += '</tr>';
+	}
+	stats += '</table>';
+	v = subs.sort();
+	while(!dup)
+	{ //if a letter is being used as a substitution more than once, print out an error message (only one message needed)
+		for(m=0; m<subs.length; m++)
+		{
+			if(subs[m] == subs[m+1] && subs[m] != undefined)
+			{ stats += '<br><span class="error">You are using a substitute<br> letter more than once!</span>';
+				dup = true;}
+		}
+		break;
+	}
+	document.getElementById("substats").innerHTML = stats;
 }
