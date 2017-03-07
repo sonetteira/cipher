@@ -12,12 +12,13 @@ function dims()
 	for(k=1; k<=cols; k++)
 		matrix += '<td><input id="x' + k + '" type="number" min="1" max="' + cols + '"></input></td>';
 	matrix += '</tr>';
+	var t = 1;
 	for(i=1; i<=rows; i++)
 	{
 		matrix += '<tr><td><input id="y' + i + '" type="number" min="1" max="' + rows + '"></input></td>';
 		for(j=1; j<=cols; j++)
 		{
-			matrix += '<td><input id="' + j + ',' + i + '" type="text" maxlength="1"></input></td>'
+			matrix += '<td><input id="' + j + ',' + i + '" type="text" maxlength="1" tabindex="' + t++ + '"></input></td>'
 		}
 		matrix += '</tr>';
 	}
@@ -81,12 +82,18 @@ function validatePos()
 	for(i=1; i<=cols; i++)
 	{
 		t = 'x'+i.toString();
-		x[i-1] = document.getElementById(t).value;
+		if(document.getElementById(t).value == "")
+			good = false;
+		else
+			x[i-1] = document.getElementById(t).value;
 	}
 	for(i=1; i<=rows; i++)
 	{
 		t = 'y'+i.toString();
-		y[i-1] = document.getElementById(t).value;
+		if(document.getElementById(t).value == "")
+			good = false;
+		else
+			y[i-1] = document.getElementById(t).value;
 	}
 	
 	//all are within range
