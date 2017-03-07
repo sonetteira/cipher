@@ -1,0 +1,40 @@
+<!--matrix.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Transposition Matrix</title>
+<script src="functions.js"></script>
+<script src="matrix.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<div id="matrix" class="dontdisplay">
+	<div class="col">
+		<label>Transposition Matrix</label>
+		<div id="grid"></div>
+		<button onclick="transpose();">Go</button>
+	</div>
+	<div class="col">
+		<label>CipherText</label><br />
+		<textarea id="ciphertext"></textarea>
+	</div><br /><br />
+	<a href="matrix.html"><button>Back</button></a>
+	<p id="message"></p>
+</div>
+<div id="ask" class="">
+	<table>
+		<tr><td></td><td>Rows</td><td></td><td>Columns</td></tr>
+		<tr><td><label>What are the dimensions of the <br />
+		matrix you would like to build?</label></td>
+		<td><input id="numrows" type="number" min="1"></input></td><td> X </td>
+		<td><input id="numcols" type="number" min="1"></input></td></tr>
+	</table><br />
+	<button onclick="dims();">Go</button>
+</div>
+<div id="menu">
+	<a href="about.html">About</a>
+	<a href="cipher.html">Back</a>
+</div>
+</body>
+</html>

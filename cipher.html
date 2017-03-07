@@ -1,0 +1,74 @@
+<!--decrypt.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Cipher</title>
+<script src="functions.js"></script>
+<script src="caesar.js"></script>
+<script src="substitution.js"></script>
+<script src="keyShift.js"></script>
+<script src="stats.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<div id="text">
+	<div class="col">
+		<label id="ctlabel">CipherText</label><br />
+		<textarea id="ciphertext"></textarea>
+	</div>
+	<div class="col">
+		<label id="ptlabel">PlainText</label><br />
+		<textarea id="plaintext" readonly></textarea>
+	</div>
+</div>
+<div id="buttons">
+	<button onclick="displayMenus(0);">SOLVE MANUALLY</button>
+	<button onclick="displayMenus(1);">CAESAR SHIFT</button>
+	<button onclick="displayMenus(2);">KEY SHIFT</button>
+	<a href="matrix.html"><button>TRANSPOSITION MATRIX</button></a>
+	<!--<button>ALL SOLUTIONS</button>-->
+	<button onclick="clearAll();">CLEAR</button>
+</div>
+<div>
+	<div class="col">
+		<div id="manual" class="dontdisplay">
+			<table><tr><td>
+				<tr><td><table id="subTable">
+					<script>buildSubTable();</script>
+				</table><br />
+				<button onclick="substitute();">Go</button>
+				<button onclick="clearSubs();">Clear</button></td>
+				<td id="substats"></td></tr>
+			</table>
+		</div>
+		<div id="caesar" class="dontdisplay">
+			<label>Shift by:</label>
+			<input id="cnumber" type="number" min="-26" max="26"></input><br /><br />
+			<button onclick="caesar();">Go</button>
+		</div>
+		<div id="key" class="dontdisplay">
+			<label>Key:</label>
+			<textarea id="skey"></textarea><br /><br />
+			<button onclick="keyShift();">Go</button>
+		</div>
+	</div>
+	<div id="statistics" class="col"></div><br />
+</div>
+<div id="message"></div>
+<div id="menu">
+	<a href="about.html">About</a>
+	<a onclick="showStats();">Show Statistics</a>
+	<a onclick="DEswitch()">Reverse to Encrypt</a>
+	<a onclick="rightToLeft()">Copy PlainText to CipherText</a>
+	<a onclick="blocksFive()">Blocks of 5</a>
+	<a onclick="randomAB()">Generate Random Alphabet</a>
+</div>
+<script>
+var ciphertext = new Array();
+var plaintext = new Array();
+var error=false;
+var which="";
+</script>
+</body>
+</html>

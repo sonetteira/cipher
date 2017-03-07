@@ -3,27 +3,27 @@ div {margin: 5px;}
 a {color: -webkit-link;
 	text-decoration: underline;
 	cursor: pointer;}
-.col {display:inline-block;
-	width: 45%;
-	vertical-align: top;}
-#text .col textarea {width: 80%;
-	height: 10em;
-	vertical-align: top;
-	background-color: #E8E8E8;}
+#ask table {margin-left: auto;
+margin-right: auto;}
+#ask table td {padding: 0px 5px;}
 #buttons button {display: inline;
 	margin: 10px;}
+#buttons a {text-decoration: none;}
+#caesar input {width: 4em;}
+#grid input {width: 2em;}
+#key label {vertical-align: top;}
 #manual table {margin-left: auto;
 	margin-right: auto;
 	text-align: center;}
 #manual table td {padding: 0px 5px;
 	vertical-align: top;}
 #manual input {width: 2em;}
-#caesar input {width: 4em;}
-#statistics table {margin-left: auto;
-	margin-right: auto;
-	border-collapse:collapse;}
-#statistics table td {border: 1px black solid;
-	padding: 3px 15px;}
+#matrix table td{
+	padding: 0px;
+	border: 1px solid black;}
+#matrix table {border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;}
 #menu {position: absolute;
 	top: 0;
 	right: 0;
@@ -31,5 +31,17 @@ a {color: -webkit-link;
 	text-align: right;}
 #menu a {margin-bottom: 8px;
 	display: block;}
+#statistics table {margin-left: auto;
+	margin-right: auto;
+	border-collapse:collapse;}
+#statistics table td {border: 1px black solid;
+	padding: 3px 15px;}
+.col {display:inline-block;
+	width: 45%;
+	vertical-align: top;}
+.col textarea {width: 80%;
+	height: 10em;
+	vertical-align: top;
+	background-color: #E8E8E8;}
 .error {color: red;}
 .dontdisplay {display: none;}

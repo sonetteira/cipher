@@ -1,19 +1,34 @@
 //general functions
-function manualMenu()
+function displayMenus(id)
 {
-	//show manual option, hide caesar option
-	document.getElementById("manual").className = "";
-	document.getElementById("caesar").className = "dontdisplay";
-	which = "substitute";
-}
-function caesarMenu()
-{
-	//show caesar option, hide manual option
-	document.getElementById("caesar").className = "";
-	document.getElementById("manual").className = "dontdisplay";
-	which = "caesar";
+	var menus = ["manual", "caesar", "key"];
+	for(var i=0; i<menus.length; i++)
+	{
+		if(i == id)
+			document.getElementById(menus[i]).className = "";
+		else
+			document.getElementById(menus[i]).className = "dontdisplay";
+	}
 }
 
+function buildSubTable()
+{
+	//build a table for manually entering a substitution cipher
+	var table = "";
+	for(i=1; i<=13; i++)
+	{
+		j = i+13;
+		table += '<tr>' + 
+			'<td>' + alphabet(i) + '</td>' +
+			'<td>-></td>' +
+			'<td><input id="' + i + '" type="text" maxlength="1"></input></td>' +
+			'<td>' + alphabet(j) + '</td>' +
+			'<td>-></td>' +
+			'<td><input id="' + j + '" type="text" maxlength="1"></input></td>' +
+			'</tr>';
+	}
+	document.getElementById("subTable").innerHTML = table;
+}
 
 function clearAll()
 {
@@ -21,10 +36,12 @@ function clearAll()
 	which = "";
 	document.getElementById("caesar").className = "dontdisplay";
 	document.getElementById("manual").className = "dontdisplay";
+	document.getElementById("key").className = "dontdisplay";
 	document.getElementById("ciphertext").value="";
 	document.getElementById("plaintext").value="";
 	document.getElementById("message").innerHTML="";
 	document.getElementById("cnumber").value="";
+	document.getElementById("skey").value="";
 	for(i=1; i<=26; i++)
 	{ document.getElementById(i).value=""; }
 	document.getElementById("substats").innerHTML = "";
@@ -90,17 +107,27 @@ function print(product)
 function DEswitch()
 { //reverse the decryption scheme to encrypt text in the same way as the original ciphertext
 	//determine if data for switch exists, determine which switch to make
-	if (which=="")
-	{	document.getElementById("message").innerHTML = "You do not have a decryption scheme to switch."; }
-	else if(which == "substitute")
-	{	substituteSwitch();
+	switch(which) {
+		case "":
+		document.getElementById("message").innerHTML = "You do not have a decryption scheme to switch.";
+		break;
+	case "substitute":
+		substituteSwitch();
 		document.getElementById("ctlabel").innerHTML = "PlainText";
 		document.getElementById("ptlabel").innerHTML = "CipherText";
-		document.getElementById("substats").innerHTML = "";}
-	else if(which == "caesar")
-	{	caesarSwitch();
+		document.getElementById("substats").innerHTML = "";
+		break;
+	case "caesar":
+		caesarSwitch();
 		document.getElementById("ctlabel").innerHTML = "PlainText";
-		document.getElementById("ptlabel").innerHTML = "CipherText"; }
+		document.getElementById("ptlabel").innerHTML = "CipherText";
+		break;
+	case "key":
+		keySwitch();
+		document.getElementById("ctlabel").innerHTML = "PlainText";
+		document.getElementById("ptlabel").innerHTML = "CipherText";
+		break;
+	}
 }
 
 function rightToLeft()
