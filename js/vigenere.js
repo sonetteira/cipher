@@ -2,10 +2,10 @@
 { //encrypt a message using a vigenere square
 	which = "vigenere";
 	error = false;
-	var key = matchKeyLength();
 	var ct = document.getElementById("ciphertext").value;
 	document.getElementById("message").innerHTML = "";
 	document.getElementById("plaintext").value = "";
+	var key = matchKeyLength();
 	ciphertext = fillCTArray(ct);
 	plaintext = new Array();
 	keytext = fillCTArray(key);
@@ -30,10 +30,10 @@ function vigDecrypt()
 {
 	which = "vigenere";
 	error = false;
-	var key = matchKeyLength();
 	var ct = document.getElementById("ciphertext").value;
 	document.getElementById("message").innerHTML = "";
 	document.getElementById("plaintext").value = "";
+	var key = matchKeyLength();
 	ciphertext = fillCTArray(ct);
 	plaintext = new Array();
 	keytext = fillCTArray(key);
@@ -65,11 +65,25 @@ function matchKeyLength()
 			newkey = newkey + key;
 		}
 		x = ct.length%key.length;
-		newkey = newkey + key.substr(0,x);
-		return newkey;
+		newkey = newkey + key.substring(0,x);
 	}
-	if(ct.length < key.length) { //ciphertext is shorter than key
-		return key.substr(0,ct.length);
+	else if(ct.length < key.length) { //ciphertext is shorter than key
+		newkey = key.substring(0,ct.length);
 	}
-	return key;
+	else { newkey = key; }
+	var spec = findSpecials(ct);
+	for(i=0; i<spec.length; i++) {
+		newkey = newkey.slice(0,spec[i]) + " " + newkey.slice(spec[i]);
+	}
+	return newkey.substring(0,ct.length);
+}
+
+function findSpecials(t)
+{ //find all the non-alphabetic characters in the message
+	var indices = [];
+	for(var i=0; i<t.length;i++) {
+		if (!t[i].match(/^[a-zA-Z]+$/))
+		{indices.push(i);}
+	}
+	return indices;
 }
