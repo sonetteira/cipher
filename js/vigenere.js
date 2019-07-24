@@ -6,24 +6,28 @@
 	document.getElementById("message").innerHTML = "";
 	document.getElementById("plaintext").value = "";
 	var key = matchKeyLength();
-	ciphertext = fillCTArray(ct);
-	plaintext = new Array();
-	keytext = fillCTArray(key);
-	for(i=0; i<ciphertext.length; i++)
-	{ //transform each letter in the ciphertext
-		blank = createLetter();
-		if(ciphertext[i].number == 99)
-		{ //this is a special character, not a letter: do nothing to it
-			blank = ciphertext[i];
+	if(validateKey(key)) {
+		ciphertext = fillCTArray(ct);
+		plaintext = new Array();
+		keytext = fillCTArray(key);
+		for(i=0; i<ciphertext.length; i++)
+		{ //transform each letter in the ciphertext
+			blank = createLetter();
+			if(ciphertext[i].number == 99)
+			{ //this is a special character, not a letter: do nothing to it
+				blank = ciphertext[i];
+			}
+			else
+			{ //is a letter
+				blank.number = (ciphertext[i].number + keytext[i].number -1) % 26;
+				blank.value = alphabet(blank.number);
+			}
+			plaintext.push(blank);
 		}
-		else
-		{ //is a letter
-			blank.number = (ciphertext[i].number + keytext[i].number -1) % 26;
-			blank.value = alphabet(blank.number);
-		}
-		plaintext.push(blank);
+		print(plaintext);
 	}
-	print(plaintext);
+	else //key is bad
+	{ document.getElementById("message").innerHTML = "Key can contain only letters."; }
 }
 
 function vigDecrypt()
@@ -34,29 +38,33 @@ function vigDecrypt()
 	document.getElementById("message").innerHTML = "";
 	document.getElementById("plaintext").value = "";
 	var key = matchKeyLength();
-	ciphertext = fillCTArray(ct);
-	plaintext = new Array();
-	keytext = fillCTArray(key);
-	for(i=0; i<ciphertext.length; i++)
-	{ //transform each letter in the ciphertext
-		blank = createLetter();
-		if(ciphertext[i].number == 99)
-		{ //this is a special character, not a letter: do nothing to it
-			blank = ciphertext[i];
+	if(validateKey(key)) {
+		ciphertext = fillCTArray(ct);
+		plaintext = new Array();
+		keytext = fillCTArray(key);
+		for(i=0; i<ciphertext.length; i++)
+		{ //transform each letter in the ciphertext
+			blank = createLetter();
+			if(ciphertext[i].number == 99)
+			{ //this is a special character, not a letter: do nothing to it
+				blank = ciphertext[i];
+			}
+			else
+			{ //is a letter
+				blank.number = (ciphertext[i].number - keytext[i].number +27) % 26;
+				blank.value = alphabet(blank.number);
+			}
+			plaintext.push(blank);
 		}
-		else
-		{ //is a letter
-			blank.number = (ciphertext[i].number - keytext[i].number +27) % 26;
-			blank.value = alphabet(blank.number);
-		}
-		plaintext.push(blank);
+		print(plaintext);
 	}
-	print(plaintext);
+	else //key is bad
+	{ document.getElementById("message").innerHTML = "Key can contain only letters."; }
 }
 
 function matchKeyLength()
 { //expand or limit the key to match the number of letters in the plaintext
-	var key = document.getElementById("vkey").value;
+	var key = document.getElementById("vkey").value.trim();
 	var ct = document.getElementById("ciphertext").value;
 	var newkey = "";
 	if(key.length < ct.length) { //key is shorter than ciphertext
@@ -82,8 +90,16 @@ function findSpecials(t)
 { //find all the non-alphabetic characters in the message
 	var indices = [];
 	for(var i=0; i<t.length;i++) {
-		if (!t[i].match(/^[a-zA-Z]+$/))
+		if(!t[i].match(/^[a-zA-Z]+$/))
 		{indices.push(i);}
 	}
 	return indices;
+}
+
+function validateKey(key)
+{ //make sure key is alphabetic
+	if(!key.match(/^[a-zA-Z\s]+$/)) {
+		return false;
+	}
+	return true;
 }
