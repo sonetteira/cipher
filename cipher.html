@@ -4,11 +4,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <title>Cipher</title>
-<script src="functions.js"></script>
-<script src="caesar.js"></script>
-<script src="substitution.js"></script>
-<script src="keyShift.js"></script>
-<script src="stats.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/caesar.js"></script>
+<script src="js/substitution.js"></script>
+<script src="js/keyShift.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/vigenere.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
@@ -26,6 +27,7 @@
 	<button onclick="displayMenus(0);">SOLVE MANUALLY</button>
 	<button onclick="displayMenus(1);">CAESAR SHIFT</button>
 	<button onclick="displayMenus(2);">KEY SHIFT</button>
+	<button onclick="displayMenus(3);">VIGENERE SQUARE</button>
 	<a href="matrix.html"><button>TRANSPOSITION MATRIX</button></a>
 	<!--<button>ALL SOLUTIONS</button>-->
 	<button onclick="clearAll();">CLEAR</button>
@@ -51,6 +53,12 @@
 			<label>Key:</label>
 			<textarea id="skey"></textarea><br /><br />
 			<button onclick="keyShift();">Go</button>
+		</div>
+		<div id="vigenere" class="dontdisplay">
+			<label>Key:</label>
+			<textarea id="vkey"></textarea><br /><br />
+			<button onclick="vigEncrypt();">Encrypt</button>
+			<button onclick="vigDecrypt();">Decrypt</button>
 		</div>
 	</div>
 	<div id="statistics" class="col"></div><br />
